@@ -5,6 +5,10 @@
     <form action=""method="post">
     {{ form.hidden_tag() }}
     <p>
+    {{ form.id.label }}<br>
+    {{ form.id(size=32) }}
+    </p>
+    <p>
     {{ form.make.label }}<br>
     {{ form.make(size=32) }}
     </p>
@@ -23,6 +27,14 @@
     <p>
     {{ form.price.label }}<br>
     {{ form.price(size=32) }}
+    </p>
+    <p>
+    {{ form.price.label }}<br>
+    {{ form.price(size=32) }}
+    </p>
+    <p>
+    {{ form.date_created.label }}<br>
+    {{ form.date_created(size=32) }}
     </p>
     <p>
     {{ form.submit(class='btn btn-primary') }}

@@ -16,17 +16,19 @@ def login():
     if form.validate_on_submit():
         flash(f'{form.username} successfully signed in!')
         return redirect('/')
-    return render_template('login.jinja', form = SignInForm())
+    return render_template('login.jinja', form=form)
 
 @app.route('/register')
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
         username= form.username.data
+        first_name= form.first_name.data
+        last_name= form.last_name.data
         email= form.email.data
         password= form.password.data
 
-        u = User(username=username,email=email,password_hash=password)
+        u = User(username=username,first_name=first_name,last_name=last_name,email=email,password_hash=password)
         user_match = User.query.filter_by(username=username).first()
         if not user_match:
             u.commit()
