@@ -1,16 +1,9 @@
-from flask import render_template, flash, redirect
-from app import app
-from app.forms import RegisterForm, SignInForm, Car_Form
+from . import bp as auth_bp
+from app.forms import RegisterForm, SignInForm
 from app.models import User
+from flask import render_template, redirect, flash
 
-@app.route('/')
-def index():
-    cdn={
-        'Homepage': ('Car')
-    }
-    return render_template('index.jinja', cdn=cdn, title='Home')
-
-@app.route('/login')
+@auth_bp.route('/login')
 def login():
     form = SignInForm()
     if form.validate_on_submit():
@@ -18,7 +11,7 @@ def login():
         return redirect('/')
     return render_template('login.jinja', form=form)
 
-@app.route('/register')
+@auth_bp.route('/register')
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -37,21 +30,3 @@ def register():
         flash(f'Username{username} already exists, try again')
         return redirect('/sign_up')
     return render_template('register.jinja', form=form)
-
-@app.route('/about')
-def about():
-
-    return render_template('about.jinja')
-
-@app.route('/blog')
-def blog():
-
-    return render_template('blog.jinja')
-
-@app.route('/car')
-def cars():
-    form = Car_Form()
-    if form.validate_on_submit():
-        flash(f'{form.username} successfully signed in!')
-        return redirect('/')
-    return render_template('car.jinja', form=form)
