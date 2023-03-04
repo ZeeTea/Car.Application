@@ -1,6 +1,6 @@
 from . import bp as auth_bp
 from app.forms import RegisterForm, SignInForm
-from app.models import User
+from main.models import User
 from flask import render_template, redirect, flash
 
 @auth_bp.route('/login')
